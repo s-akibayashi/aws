@@ -2,10 +2,6 @@
 
 set -ue
 
-TICKET=
-echo "TICKET NUMBER?"
-read TICKET
-
 Region=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone | sed -e 's/.$//')
 InstanceId=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
 HOST_AND_DATE="$(hostname)_$(date '+%Y%m%d')"
@@ -23,6 +19,9 @@ EC2_VolumeIds=(`echo $EC2_VolumeId`)
 
 snapshot() {
 ## スナップショットの作成
+TICKET=
+echo "TICKET NUMBER?"
+read TICKET
 Snapshot=$(aws ec2 describe-snapshots \
   --filters "Name=tag:Auto_SS_TG,Values=$InstanceId" \
   --region ap-northeast-1 \
@@ -43,6 +42,9 @@ del_snapshot() {
 }
 
 ami() {
+TICKET=
+echo "TICKET NUMBER?"
+read TICKET
 aws ec2 create-image \
       --instance-id $(curl -s http://169.254.169.254/latest/meta-data/instance-id) \
       --name ${HOST_AND_DATE} \
