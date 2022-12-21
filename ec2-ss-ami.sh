@@ -38,7 +38,7 @@ del_snapshot() {
     SNAPID=
     echo "snapshotID?"
     read SNAPID
-    aws ec2 delete-snapshot --volume-id $SNAPID
+    aws ec2 delete-snapshot --snapshot-id $SNAPID
 }
 
 ami() {
