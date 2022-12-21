@@ -41,6 +41,7 @@ aws ec2 create-image \
       --name ${HOST_AND_DATE} \
       --no-reboot \
       --tag-specifications 'ResourceType=image,Tags=[{Key=Name,Value='$HOST_AND_DATE'},{Key=TICKET,Value='$TICKET'}]' \
+     'ResourceType=snapshot,Tags=[{Key=Name,Value='$HOST_AND_DATE'},{Key=TICKET,Value='$TICKET'}]'  \
       --description "created by $0"
 }
 
