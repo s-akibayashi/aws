@@ -40,8 +40,7 @@ aws ec2 create-image \
       --instance-id $(curl -s http://169.254.169.254/latest/meta-data/instance-id) \
       --name ${HOST_AND_DATE} \
       --no-reboot \
-      --tag "Key=Name,Value=${HOST_AND_DATE}" \
-      --tag "Key=TICKET,Value=${TICKET}" \
+      --tag-specifications 'ResourceType=image,Tags=[{Key=Name,Value='$HOST_AND_DATE'},{Key=TICKET,Value='$TICKET'}]' \
       --description "created by $0"
 }
 
