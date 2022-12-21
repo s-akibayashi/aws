@@ -8,7 +8,6 @@ read TICKET
 
 Region=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone | sed -e 's/.$//')
 InstanceId=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
-MyInstance=$(hostname)
 HOST_AND_DATE="$(hostname)_$(date '+%Y%m%d')"
 
 export AWS_DEFAULT_REGION=${Region}
