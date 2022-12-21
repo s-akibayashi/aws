@@ -29,7 +29,7 @@ Snapshot=$(aws ec2 describe-snapshots \
 
 if [ -z "$Snapshot" ]; then
     for VolumeId in ${EC2_VolumeIds[@]}; do
-      aws ec2 create-snapshot --volume-id ${VolumeId} --tag-specifications 'ResourceType=snapshot,Tags=[{Key=Name,Value='$HOST_AND_DATE'},{Key=TICKET,Value='$TICKET'}]'  --description "created by $0"
+      aws ec2 create-snapshot --volume-id ${VolumeId} --tag-specifications 'ResourceType=snapshot,Tags=[{Key=Name,Value='$HOST_AND_DATE'},{Key=TICKET,Value='$TICKET'}]'  --description "created by $0" |grep "SnapshotId"
     done
 fi
 }
