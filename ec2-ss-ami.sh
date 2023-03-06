@@ -22,15 +22,9 @@ snapshot() {
 TICKET=
 echo "TICKET NUMBER?"
 read TICKET
-Snapshot=$(aws ec2 describe-snapshots \
-  --filters "Name=tag:Auto_SS_TG,Values=$InstanceId" \
-  --region ap-northeast-1 \
-  --output text | head -n1)
-  
     for VolumeId in ${EC2_VolumeIds[@]}; do
       aws ec2 create-snapshot --volume-id ${VolumeId} --tag-specifications 'ResourceType=snapshot,Tags=[{Key=Name,Value='$HOST_AND_DATE'},{Key=TICKET,Value='$TICKET'}]'  --description "created by $0" |grep "SnapshotId"
     done
-}
 
 del_snapshot() {
     SNAPID=
